@@ -1,0 +1,19 @@
+{
+  "name": "socket_study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Zasz123 <ygm12345@naver.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/socket.io": "^2.1.8"
+  }
+}

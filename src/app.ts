@@ -1,6 +1,19 @@
 import express from "express";
-import socket from "socket.io";
+import http from "http";
 
-const app: express.Application = express();
+import config from "./config";
 
-export default app;
+import loader from "./loaders";
+
+function startServer() {
+  const app: express.Application = express();
+  const server = http.createServer(app);
+
+  loader({ expressApp: app, httpServer: server });
+
+  server.listen(config.port, () => {
+    console.log("server running");
+  });
+}
+
+startServer();

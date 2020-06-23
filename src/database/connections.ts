@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import config from "../config";
+import logger from '../loaders/logger';
 
 const sequelize = new Sequelize({
   host: config.db.host,
@@ -18,10 +19,10 @@ const connection = async (force: boolean) => {
   const connect = await sequelize.sync({ force });
 
   if (!connect) {
-    console.log("DB connection error");
+    logger.error("DB Connect Error")
     return false;
   } else {
-    console.log("DB connected");
+    logger.info("info", "DB Connected")
     return true;
   }
 };

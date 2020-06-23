@@ -1,22 +1,32 @@
 import { createLogger, format, transports, config } from "winston";
+import rootPath from 'app-root-path';
+
+// error
+// warn
+// info
+// http
+// verbose
+// debug
+// silly
 
 const logger = createLogger({
   levels: config.npm.levels,
   format: format.combine(
-    format.splat(),
-    format.json(),
+    format.colorize(),
     format.timestamp({
       format: "YYYY-MM-DD HH:mm:ss",
-    })
+    }),
+    format.printf(
+      info => `${info.timestamp} [${info.level}] : ${info.message}`
+    ),
   ),
   transports: [
-    new transports.Console({
-      level: "info",
-      format: format.combine(format.cli(), format.splat()),
-    }),
+    new transports.Console(),
+    new transports.File({
+      level: "error",
+      filename: `${rootPath}/logs/error.log`,
+    })
   ],
 });
-
-logger.log("info", "hihi");
 
 export default logger;

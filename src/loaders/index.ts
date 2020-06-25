@@ -1,7 +1,7 @@
 import { Application } from "express";
 import { Server } from "http";
 
-import loggerLoader from "./logger";
+import logger from "./logger";
 import expressLoader from "./express";
 import socketLoader from "./socket";
 
@@ -12,12 +12,11 @@ export default async ({
   expressApp: Application;
   httpServer: Server;
 }) => {
-  // logger by winston load
-  loggerLoader;
-
   //express load
-  expressLoader(expressApp);
+  await expressLoader(expressApp);
+  logger.info("express loaded");
 
   //socket load
-  socketLoader(httpServer);
+  await socketLoader(httpServer);
+  logger.info("socket loaded");
 };

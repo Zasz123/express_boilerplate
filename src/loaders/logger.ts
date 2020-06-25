@@ -1,6 +1,7 @@
 import { createLogger, format, transports, config } from "winston";
-import rootPath from 'app-root-path';
+import rootPath from "app-root-path";
 
+// --- levels ---
 // error
 // warn
 // info
@@ -17,15 +18,15 @@ const logger = createLogger({
       format: "YYYY-MM-DD HH:mm:ss",
     }),
     format.printf(
-      info => `${info.timestamp} [${info.level}] : ${info.message}`
-    ),
+      (info) => `${info.timestamp} [${info.level}] : ${info.message}`
+    )
   ),
   transports: [
     new transports.Console(),
     new transports.File({
       level: "error",
       filename: `${rootPath}/logs/error.log`,
-    })
+    }),
   ],
 });
 

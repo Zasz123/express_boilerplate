@@ -4,14 +4,14 @@ import logger from "../../loaders/logger";
 
 const UserRegister = async (user: IUserRegister) => {
   try {
-    const createduser = await User.create(user);
+    const createdUser = await User.create(user);
 
-    if (!createduser) {
-      throw new Error("User Not Registered");
+    if (!createdUser) {
+      throw new Error("Register Error");
     }
 
     return {
-      createduser,
+      createdUser,
     };
   } catch (error) {
     logger.error(error.message);

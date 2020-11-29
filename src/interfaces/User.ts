@@ -3,3 +3,8 @@ export interface IUserRegister {
   password: string;
   name: string;
 }
+
+export interface IUserLogin {
+  accountId: string;
+  password: string;
+}

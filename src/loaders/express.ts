@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 
-import rootController from "../routes/controllers/rootController";
+import rootController from "../routes/controllers/root.controller";
 import { customErrorMiddleware } from "../routes/middlewares/error";
 
 export default (app: express.Application) => {

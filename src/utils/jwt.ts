@@ -1,14 +1,21 @@
 import jwt from "jsonwebtoken";
 import config from "../config";
 import logger from "../loaders/logger";
-
-type ITokenPayload = {
-  id: number;
-};
+import { ITokenPayload } from "../interfaces/auth";
 
 export const generateJWT = (payload: ITokenPayload) => {
   try {
-    const token: string = jwt.sign(
+    const accessToken: string = jwt.sign(
+      {
+        id: payload.id,
+      },
+      config.jwtSecret,
+      {
+        expiresIn: "5h",
+      }
+    );
+
+    const refreshToken: string = jwt.sign(
       {
         id: payload.id,
       },
@@ -18,7 +25,10 @@ export const generateJWT = (payload: ITokenPayload) => {
       }
     );
 
-    return token;
+    return {
+      accessToken,
+      refreshToken,
+    };
   } catch (error) {
     logger.error(error.message);
     throw error;

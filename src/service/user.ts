@@ -1,7 +1,7 @@
 import { Service, Inject } from "typedi";
 import { WhereOptions } from "sequelize";
 import User from "../database/models/user.models";
-import { IUserMyInfo } from "../interfaces/member";
+import { IUserMyInfo } from "../interfaces/user";
 
 @Service()
 export default class UserService {

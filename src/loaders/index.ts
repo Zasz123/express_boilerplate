@@ -5,6 +5,9 @@ import logger from "./logger";
 import expressLoader from "./express";
 import socketLoader from "./socket";
 
+import User from "../database/models/user.models";
+import dependencyInjector from "./dependencyInjector";
+
 export default async ({
   expressApp,
   httpServer,
@@ -12,11 +15,22 @@ export default async ({
   expressApp: Application;
   httpServer: Server;
 }) => {
-  //express load
-  await expressLoader(expressApp);
+  //dependency injector
+  dependencyInjector({
+    models: [
+      {
+        model: User,
+        name: "userModel",
+      },
+    ],
+  });
+  logger.info("dependency injector loaded");
+
+  // express load
+  expressLoader(expressApp);
   logger.info("express loaded");
 
-  //socket load
-  await socketLoader(httpServer);
+  // socket load
+  socketLoader(httpServer);
   logger.info("socket loaded");
 };
